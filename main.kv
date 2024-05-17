@@ -1,0 +1,272 @@
+#:import MapView kivy_garden.mapview.MapView
+<MyWidget>:
+    canvas.before:
+        Color:
+            rgba: 173/255,216/255,230/255,1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    orientation: 'vertical'
+    MapView:
+        id: mapview
+        zoom: 15
+        lat: 0
+        lon: 0
+        size_hint: (1, 1)
+        
+        
+            
+    GridLayout:
+        id:box2
+        orientation: 'tb-lr'
+        size_hint: (1, None)
+        cols:2
+        Label:
+            canvas.before:
+                Color:
+                    rgba: 0, 0, .5, 1
+                Line:
+                    width: 1
+                    points: self.x, self.y+50, self.width+1120, self.y+50
+            id: text1
+            text:"Detector de queda: "
+            text_size: self.size
+            halign:"left"
+            valign:"top"
+            padding: [10, 10]
+            font_name: 'Roboto'
+            font_size: 32
+            markup: True
+            color: 0,0,0,1
+        Label:
+            id: text3
+            text:"Botão de emergência: "
+            text_size: self.size
+            halign:"left"
+            valign:"top"
+            padding: [10, 10]
+            font_name: 'Roboto'
+            font_size: 32
+            markup: True
+            color: 0,0,0,1
+        Label:
+            id: text11
+            text:" "
+            size_hint: (0.5, 4)
+            text_size: self.size
+            halign:"right"
+            valign:"middle"
+            padding: [20, 15]
+            font_name: 'Roboto'
+            font_size: 30
+            markup: True
+            color: 0,0,0,1
+        Label:
+            id: text33
+            text:" "
+            size_hint: (0.5, 4)
+            text_size: self.size
+            halign:"right"
+            valign:"middle"
+            padding: [20, 15]
+            font_name: 'Roboto'
+            font_size: 30
+            markup: True
+            color: 0,0,0,1
+    GridLayout:
+        id:box3
+        orientation: 'tb-lr'
+        cols:1
+        Label:
+            canvas.before:
+                Color:
+                    rgba: 0, 0, .5, 1
+                Line:
+                    width: 1
+                    points: self.x, self.y+120, self.width, self.y+120
+            id: text4
+            text:"Lembretes"
+            text_size: self.size
+            halign:"center"
+            valign:"middle"
+            size_hint: (1, 0.2)
+            font_name: 'Roboto'
+            font_size: 35
+            markup: True
+            color: 0,0,0,1
+        GridLayout:
+            canvas.before:
+                Color:
+                    rgba: 0, 0, .5, 1
+            id:box4
+            orientation: 'tb-lr'
+            cols:2
+            Label:
+                id: text43
+                text:"Nome: "
+                size_hint: (0.5, 1)
+                text_size: self.size
+                halign:"left"
+                valign:"top"
+                padding: [20, 20]
+                font_name: 'Roboto'
+                font_size: 35
+                markup: True
+                color: 0,0,0,1
+            Label:
+                id: text45
+                text:"Horário: "
+                size_hint: (0.5, 1)
+                text_size: self.size
+                halign:"left"
+                valign:"top"
+                padding: [20, 20]
+                font_name: 'Roboto'
+                font_size: 35
+                markup: True
+                color: 0,0,0,1
+            Label:
+                id: text46
+                text:"Frequência: "
+                size_hint: (0.5, 1)
+                text_size: self.size
+                halign:"left"
+                valign:"top"
+                padding: [20, 20]
+                font_name: 'Roboto'
+                font_size: 35
+                markup: True
+                color: 0,0,0,1
+            Button:
+                canvas.before:
+                    Color:
+                        rgba: 52/255, 85/255, 235/255, 1
+                    Line:
+                        width: 2
+                        rectangle: self.x, self.y, self.width, self.height
+                id: text47
+                text:"Lista de lembretes"
+                size_hint: (0.5, 1)
+                text_size: self.size
+                halign:"center"
+                valign:"center"
+                font_name: 'Roboto'
+                font_size: 40
+                padding_x: 10
+                padding_y: 10
+                markup: True
+                background_normal: ''
+                background_color: 52/255, 85/255, 235/255, 0.4
+                color: 0,0,0,1
+                on_press: root.listb()
+            TextInput: 
+                id: input1
+                hint_text:'Ex: Paracetamol'
+                font_size: 35
+                size_hint: 0.6, 0.5
+            TextInput: 
+                id: input2
+                hint_text:'Ex: 16:00 ou 09:00'
+                font_size: 35
+                size_hint: 0.6, 0.5
+            MultiSelectSpinner:
+                canvas.before:
+                    Color:
+                        rgba: .5, .5, .5, 1
+                    Line:
+                        width: 1
+                        rectangle: self.x, self.y, self.width, self.height
+                background_normal: ''
+                background_color: 1, 1, 1, 1
+                color: .5, .5, .5, 1
+                id: freq
+                text: "Clique para selecionar"
+                font_size: 35
+                size_hint: 0.6, 0.5
+                values: 'SEG', 'TER', 'QUA', 'QUI', 'SEX', 'SAB', 'DOM'
+                
+
+            Button:
+                canvas.before:
+                    Color:
+                        rgba: 60/255, 178/255, 92/255, 1
+                    Line:
+                        width: 2
+                        rectangle: self.x, self.y, self.width, self.height
+                id: text47
+                text:"Adicionar"
+                size_hint: (0.6, 1)
+                text_size: self.size
+                halign:"center"
+                valign:"middle"
+                font_name: 'Roboto'
+                font_size: 40
+                padding_x: 10
+                padding_y: 10
+                markup: True
+                background_normal: ''
+                background_color: 50/255, 168/255, 82/255, 0.4
+                color: 0,0,0,1
+                on_press: root.add()
+                
+
+
+<MultiSelectOption@ToggleButton>:
+    size_hint: 1, None
+    height: '38dp'
+    background_color: 0, 0, 0.8, 1
+    color: 1, 1, 1, 1
+    
+
+<ListPage>:
+    canvas.before:
+        Color:
+            rgba: 173/255,216/255,230/255,1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    orientation: 'vertical'
+    GridLayout:
+        id:box4
+        orientation: 'tb-lr'
+        cols:1
+        size_hint_y:  None
+        height: self.minimum_height
+        Label:
+            id:list
+            text: "Lista de lembretes"
+            size_hint: (0.5, None)
+            height: 100
+            text_size: self.size
+            halign:"center"
+            valign:"middle"
+            font_name: 'Roboto'
+            font_size: 40
+            markup: True
+            color: 0,0,0,1
+        Button:
+            canvas.before:
+                Color:
+                    rgba: 52/255, 85/255, 235/255, 1
+                Line:
+                    width: 2
+                    rectangle: self.x, self.y, self.width, self.height
+            id: voltar
+            text:"Voltar"
+            size_hint: (0.5, None)
+            height: 120
+            halign:"center"
+            valign:"middle"
+            font_name: 'Roboto'
+            padding_x: 10
+            padding_y: 10
+            font_size: 40
+            markup: True
+            background_normal: ''
+            background_color: 52/255, 85/255, 235/255, 0.4
+            color: 0,0,0,1
+            on_press: root.mainb()
+    
+        
+
+    
