@@ -23,3 +23,5 @@ Esse projeto foi desenvolvido como Projeto Final de Curso (PFC) em Engenharia de
 * Dispositivo eletrônico:
 <img src="https://github.com/user-attachments/assets/cf2c7862-a1eb-4809-a4b1-4c3c567d4284" data-canonical-src="https://github.com/user-attachments/assets/cf2c7862-a1eb-4809-a4b1-4c3c567d4284" width="600" height="400" />
 <img src="https://github.com/user-attachments/assets/6a6a23aa-9b08-4ac0-94ad-22a96250d0da" data-canonical-src="https://github.com/user-attachments/assets/6a6a23aa-9b08-4ac0-94ad-22a96250d0da" width="600" height="400" />
+
+* Vídeo: [Resultados do Projeto](https://youtu.be/VO8_mbV8mLY?si=8nFnTA5lWIkdINaa)
