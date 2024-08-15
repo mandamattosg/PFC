@@ -22,14 +22,11 @@ from kivy.resources import resource_find
 from datetime import datetime
 from datetime import timedelta
 from jnius import autoclass
-
 from kvdroid.jclass.android import Color
 from kvdroid.tools import get_resource
 from kvdroid.tools.notification import create_notification
-
 from oscpy.server import OSCThreadServer
 from oscpy.client import OSCClient
-
 import pickle
 
 
@@ -61,17 +58,13 @@ class MyWidget(BoxLayout):
         super(MyWidget, self).__init__(**kwargs)
 
         self.now = datetime.now()
-        
-       
         self.start_service()
        
         Clock.schedule_once(self.loop, 1)
         Clock.schedule_interval(self.loop, 10)
         Clock.schedule_interval(self.updateQUEDA, 180) #retem valor por 3min
         Clock.schedule_interval(self.updateSOS, 180)
-        
     
-      
     def save_data(self):
         pickle_data = listlembrete
         file_name = "mypickle.pickle"
@@ -79,10 +72,6 @@ class MyWidget(BoxLayout):
         pickle.dump(pickle_data, pickle_out)
         pickle_out.close()
             
-       
-        
-        
-        
     def start_service(self):
         SERVICE_NAME=u'{packagename}.Service{servicename}'.format(packagename=u'org.test.myapp', servicename=u'Myapp')
         service = autoclass(SERVICE_NAME)
@@ -90,7 +79,6 @@ class MyWidget(BoxLayout):
         service.start(mActivity, '')
         return service
         
-
     def loop(self, dt):
         URL_queda = "https://api.thingspeak.com/channels/2423871/feeds.json?api_key=9CWWQKBE29OI6L5N&results=1" 
         URL_sos = "https://api.thingspeak.com/channels/2422645/feeds.json?api_key=IQDQ48W2WNWS1TE5&results=1"
@@ -161,23 +149,19 @@ class MyWidget(BoxLayout):
                     #logica de ser diferente do anterior
                     self.atualS = int(specific_char_trimmed3)
                     
-                    
                     if(self.atualS != self.anteriorS):
                         self.ids.text33.text = "ATIVADO"
                         self.ids.text33.color = (1,0,0,1) 
-                        
-                      
                     else:
                         self.ids.text33.text = "NÃO ATIVADO"
                         self.ids.text33.color = (0,100/255,0,1) 
+                        
     def updateSOS(self, dt):
         self.anteriorS = self.atualS
-        
         
     def updateQUEDA(self, dt):
         self.anteriorQ = self.atualQ
         
-
     def resL(self, *args):
         #print ("ResultL: ", self.requestL.result)
         L_global.append(self.requestL.result)
@@ -220,8 +204,6 @@ class MyWidget(BoxLayout):
                     	self.map.center_on(float(specific_char_trimmed6), float(specific_char_trimmed44))
                     	self.anteriorL = atual
                     	
-                    
-                    	
 
     def resLem(self, *args):
         print("Lembrete posted!")
@@ -244,7 +226,6 @@ class MyWidget(BoxLayout):
         controlspinner = 1
         self.send_variable()
         
-       
     pass
 
 
@@ -308,14 +289,12 @@ class MultiSelectSpinner(Button):
             
         freq = self.text
     
-    
-        
+
 
 class ListPage(BoxLayout):
     def __init__(self,**kwargs):
         super().__init__(**kwargs)
         self.load_data()
-        
         
     def update_info(self, message):
         app.main_page.save_data()
@@ -344,7 +323,6 @@ class ListPage(BoxLayout):
         lista = ""
         global all_lembretes
         
-        
         for i in range(0, len(message), 3):
             lista = message[i] + " " + message[i+1] + " " + message[i+2] 
             all_lembretes.append(message[i]) 
@@ -352,7 +330,6 @@ class ListPage(BoxLayout):
             all_lembretes.append(message[i+2]) 
             
         self.listof_label.text = lista 
-            
         all_lembretes.append(self.active) #checkbox
         
     def load_data(self):
@@ -370,13 +347,9 @@ class ListPage(BoxLayout):
                 listlembrete.append(reloaded_list[i+1])
                 listlembrete.append(reloaded_list[i+2])
                 #print("lista pra passar: ", lista)
-                
-                self.update_info(lista)
-                
-                
+                self.update_info(lista)  
         except:
             print("error")
-            
             
     def check_click(self, instance, value):
         global aux_lembretes
@@ -410,17 +383,13 @@ class ListPage(BoxLayout):
 
     def delete_item(self, *args):
         global aux_lembretes
-            
         self.clear_widgets()
         self.add_widget(self.ids.box4)
-        
         listlembrete.remove(aux_lembretes[0])
         listlembrete.remove(aux_lembretes[1])
         listlembrete.remove(aux_lembretes[2])
-
         self.newgrid.remove_widget(self.delb)
         self.remove_widget(self.newgrid)
-        
         self.send_variable()
         listal = []
 
@@ -428,9 +397,7 @@ class ListPage(BoxLayout):
             listal.append(listlembrete[i])
             listal.append(listlembrete[i+1])
             listal.append(listlembrete[i+2])
-            
             self.update_info(listal)
-        
         
     def send_variable(self):
         global listlembrete
@@ -440,14 +407,11 @@ class ListPage(BoxLayout):
         messageE = teste.encode('utf-8')
         client.send_message(b'/path', [messageE])
 
-
-
     def mainb(self):
         app.screen_manager.current = "Main"
         
     
     
-
 class main(App):
     def build(self):
         self.screen_manager = ScreenManager()
@@ -456,13 +420,11 @@ class main(App):
         screen = Screen(name="Main")
         screen.add_widget(self.main_page)
         self.screen_manager.add_widget(screen)
-        
       
         self.list_page = ListPage()
         screen = Screen(name="List")
         screen.add_widget(self.list_page)
         self.screen_manager.add_widget(screen)
-        
         
         return self.screen_manager
         
